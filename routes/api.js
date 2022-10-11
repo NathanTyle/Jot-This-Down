@@ -43,3 +43,5 @@ notes.get('/notes', (req, res) => {
     }
 
   });
+
+  module.exports = notes;
