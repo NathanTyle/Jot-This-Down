@@ -27,3 +27,19 @@ notes.get('/notes', (req, res) => {
       res.error('Error in adding notes');
     }
   });
+
+  notes.delete('/notes/:id',(req, res) => {
+    const data = require('../db/db.json');
+    console.info(`${req.method} request received to delete a note`);
+    const reqNote = req.params.id;
+
+    for(var i = 0; i < data.length; i ++) {
+        if (reqNote == data[i].id) {
+            data.splice(i,1);
+            writeToFile('./db/db.json', data);
+            res.json(JSON.parse(data));
+            return;
+        }
+    }
+
+  });
